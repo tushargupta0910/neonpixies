@@ -2,7 +2,7 @@
 
 NeonPixies is a top down 2D arcade shooter (2-player) which we have created as tribute to the eclectic era of the 80s- When Simple, Fulfiling games could be played at just a coin a live.
 
-We have uploaded the assets and executables on our drive. all our code is on  github. download the folder from drive and run the neonpixies.exe file to play the game.
+We have uploaded the assets and executables on our drive. all our code is on  github (final branch). download the folder from drive and run the neonpixies.exe file to play the game.
 This game is for windows only right now.
 
 The controls for shooting are hurried. We are sorry if you find down arrow and s very cramped. We can change the controls such that Right ctrl and LShift is used for shooting.
