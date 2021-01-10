@@ -1,5 +1,6 @@
 extends RigidBody2D
-
+var explosion = load("res://explosion.tscn")
+signal player_died
 export (int) var engine_thrust
 export (int) var spin_thrust
 
@@ -21,6 +22,11 @@ func get_input():
 	if Input.is_action_pressed("ui_up"):
 		thrust = Vector2(engine_thrust, 0)
 		ani="Thrust"
+		var audionode = $"move1"
+		audionode.play()
+	elif Input.is_action_just_released("ui_up"):
+		var audionode = $"move1"
+		audionode.stop()
 	else:
 		thrust = Vector2()
 		ani="Steady"
@@ -32,6 +38,7 @@ func get_input():
 
 func _process(delta):
 	get_input()
+	get_node("Label").text = str(life)
 	$AnimatedSprite.animation = ani
 	if Input.is_action_pressed("ui_down") and firingcooldown.is_stopped():
 		firingcooldown.start(fireDelay)
@@ -45,6 +52,15 @@ func _physics_process(delta):
 	set_applied_torque(rotation_dir * spin_thrust)
 func damage(damage:int):
 	life-=damage
+	var dam = $"damage"
+	dam.play()
 	$AnimatedSprite.play("Damage")
 	if life==0:
+		var xplo = $"explo"
+		xplo.play()
+		var explo = explosion.instance()
+		explo.position = self.position
+		get_parent().add_child(explo)
+		explo.emitting = true
+		emit_signal("player_died")
 		queue_free()
